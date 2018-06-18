@@ -20,4 +20,15 @@ require "oyster_card.rb"
         expect {oyster.subtract_fare(50)}.to change {oyster.balance}.by -50
       end
     end
+
+    describe "track journeys" do
+      it 'should start checked out' do
+        expect(OysterCard.new.card_tracker).to eq 'Not in use'
+      end
+      it 'should change status when checking in' do
+        oyster = OysterCard.new
+        oyster.touch_in
+        expect(oyster.card_tracker).to eq 'Active'
+      end
+    end
   end
