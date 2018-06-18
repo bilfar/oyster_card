@@ -13,5 +13,8 @@ def top_up(value)
   @balance += value
 end
 
+def subtract_fare(value)
+@balance -= value
+end
 
 end

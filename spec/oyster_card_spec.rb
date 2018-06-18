@@ -15,6 +15,9 @@ require "oyster_card.rb"
         oyster = OysterCard.new
         expect { oyster.top_up(100)}.to raise_error "maximal limit exceed"
       end
-
+      it "should deduct credit from my card" do
+        oyster = OysterCard.new
+        expect {oyster.subtract_fare(50)}.to change {oyster.balance}.by -50
+      end
     end
   end
