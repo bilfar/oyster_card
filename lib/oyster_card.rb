@@ -1,6 +1,7 @@
 class OysterCard
 
   DEFAULT_BALANCE = 0
+  MINIMUM_ALLOWANCE = 1
   MAXIMUM_BALANCE = 90
   attr_reader :balance
   attr_accessor :card_tracker
@@ -20,6 +21,7 @@ class OysterCard
   end
 
   def touch_in
+    fail "not enough funds" if @balance < MINIMUM_ALLOWANCE
     @card_tracker = 'Active'
   end
 

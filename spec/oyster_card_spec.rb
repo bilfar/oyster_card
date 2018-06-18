@@ -19,6 +19,11 @@ require "oyster_card.rb"
         oyster = OysterCard.new
         expect {oyster.subtract_fare(50)}.to change {oyster.balance}.by -50
       end
+      it "should not allow you to travel if balance is below minimum" do
+        oyster = OysterCard.new
+        expect {oyster.touch_in}.to raise_error "not enough funds" 
+      end
+
     end
 
     describe "track journeys" do
@@ -26,18 +31,18 @@ require "oyster_card.rb"
         expect(OysterCard.new.card_tracker).to eq 'Not in use'
       end
       it 'should change status when checking in' do
-        oyster = OysterCard.new
+        oyster = OysterCard.new(10)
         oyster.touch_in
         expect(oyster.card_tracker).to eq 'Active'
       end
       it "should change status when checking out" do
-        oyster = OysterCard.new
+        oyster = OysterCard.new(10)
         oyster.touch_in
         oyster.touch_out
         expect(oyster.card_tracker).to eq "Not in use"
       end
       it "#in_journey? to true" do
-        oyster = OysterCard.new
+        oyster = OysterCard.new(10)
         oyster.touch_in
         expect(oyster.in_journey?).to eq(true)
       end
