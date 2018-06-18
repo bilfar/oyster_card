@@ -30,5 +30,23 @@ require "oyster_card.rb"
         oyster.touch_in
         expect(oyster.card_tracker).to eq 'Active'
       end
+      it "should change status when checking out" do
+        oyster = OysterCard.new
+        oyster.touch_in
+        oyster.touch_out
+        expect(oyster.card_tracker).to eq "Not in use"
+      end
+      it "#in_journey? to true" do
+        oyster = OysterCard.new
+        oyster.touch_in
+        expect(oyster.in_journey?).to eq(true)
+      end
+      it "#in_journey? to false" do
+        oyster = OysterCard.new
+        expect(oyster.in_journey?).to eq(false)
+      end
+
+
+
     end
   end
