@@ -11,5 +11,10 @@ require "oyster_card.rb"
         oyster_balance = oyster.balance
         expect(oyster.top_up(50)).to eq oyster_balance + 50
       end
+      it "should fail if maximum limit in exceed" do
+        oyster = OysterCard.new
+        expect { oyster.top_up(100)}.to raise_error "maximal limit exceed"
+      end
+
     end
   end
