@@ -29,18 +29,18 @@ require "oyster_card.rb"
 
     describe "track journeys" do
       it 'should start checked out' do
-        expect(OysterCard.new.in_journey).to eq false
+        expect(OysterCard.new.in_journey?).to eq false
       end
       it 'should change status when checking in' do
         oyster = OysterCard.new(10)
         oyster.touch_in(:station)
-        expect(oyster.in_journey).to eq true
+        expect(oyster.in_journey?).to eq true
       end
       it "should change status when checking out" do
         oyster = OysterCard.new(10)
         oyster.touch_in(:station)
         oyster.touch_out
-        expect(oyster.in_journey).to eq false
+        expect(oyster.in_journey?).to eq false
       end
       it 'should set entry station to nil on check out' do
         oyster = OysterCard.new(10)
