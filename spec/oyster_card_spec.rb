@@ -55,5 +55,9 @@ require "oyster_card.rb"
         oyster = OysterCard.new
         expect(oyster.in_journey?).to eq(false)
       end
+      it "should tell you where you traveled from"
+      oyster = OysterCard.new(10)
+      oyster.touch_in
+      expect(oyster.entry_point). to eq("london")
     end
   end
