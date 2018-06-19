@@ -17,7 +17,7 @@ require "oyster_card.rb"
       end
       it "should deduct credit from my card" do
         oyster = OysterCard.new
-        expect {oyster.subtract_fare(50)}.to change {oyster.balance}.by(-50)
+        expect { oyster.send(:subtract_fare, 50) }.to change {oyster.balance}.by(-50)
       end
       it "should not allow you to travel if balance is below minimum" do
         oyster = OysterCard.new

@@ -17,20 +17,22 @@ class OysterCard
     @balance += value
   end
 
-  def subtract_fare(value)
-  @balance -= value
-  end
-
   def touch_in
     fail "not enough funds" if @balance < MINIMUM_FARE
     @in_journey = true
   end
 
   def touch_out
+    subtract_fare(MINIMUM_FARE)
     @in_journey = false
   end
 
   def in_journey?
     @in_journey
+  end
+
+  private
+  def subtract_fare(value)
+  @balance -= value
   end
 end
