@@ -7,6 +7,9 @@ class OysterCard
 
   def initialize(balance = DEFAULT_BALANCE)
   @balance = balance
+  @tracks = []
+  @trips = []
+
   end
 
   def top_up(value)
@@ -17,16 +20,25 @@ class OysterCard
   def touch_in(station)
     fail "not enough funds" if @balance < MINIMUM_FARE
     @entry_station = station
+    @tracks << @entry_station
+    # @trips << @tracks
   end
 
-  def touch_out
+  def touch_out(station)
     subtract_fare(MINIMUM_FARE)
+    @exit_station = station
+    @tracks << @exit_station
+    @trips << @tracks
     @entry_station = nil
   end
 
   def in_journey?
     # it converts the value to a boolean and then return the opposite value
     !!entry_station
+  end
+
+  def trip_tracker
+    @trips
   end
 
   private

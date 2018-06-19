@@ -40,19 +40,19 @@ require "oyster_card.rb"
       it "should change status when checking out" do
         oyster = OysterCard.new(10)
         oyster.touch_in(:station)
-        oyster.touch_out
+        oyster.touch_out(:station)
         expect(oyster.in_journey?).to eq false
       end
       it 'should set entry station to nil on check out' do
         oyster = OysterCard.new(10)
         oyster.touch_in(:station)
-        oyster.touch_out
+        oyster.touch_out(:station)
         expect(oyster.entry_station).to eq(nil)
       end
       it 'should deduct minimum fare when checking out' do
         oyster = OysterCard.new(10)
         oyster.touch_in(:station)
-        expect{ oyster.touch_out }.to change { oyster.balance }.by(-OysterCard::MINIMUM_FARE)
+        expect{ oyster.touch_out(:station) }.to change { oyster.balance }.by(-OysterCard::MINIMUM_FARE)
       end
       it "#in_journey? to true" do
         oyster = OysterCard.new(10)
@@ -72,7 +72,7 @@ require "oyster_card.rb"
         oyster = OysterCard.new(10)
         oyster.touch_in(:station)
         oyster.touch_out(:station2)
-        expect(oyster.trips).to eq([[:station, :station2]])
+        expect(oyster.trip_tracker).to eq([[:station, :station2]])
       end
     end
   end
