@@ -1,12 +1,9 @@
 class OysterCard
 
   DEFAULT_BALANCE = 0
-  MINIMUM_ALLOWANCE = 1
   MINIMUM_FARE = 1
   MAXIMUM_BALANCE = 90
   attr_reader :balance, :entry_station
-  attr_accessor :in_journey
-
 
   def initialize(balance = DEFAULT_BALANCE)
   @balance = balance
@@ -25,7 +22,6 @@ class OysterCard
   def touch_out
     subtract_fare(MINIMUM_FARE)
     @entry_station = nil
-
   end
 
   def in_journey?

@@ -2,6 +2,7 @@ require "oyster_card.rb"
 
  describe OysterCard do
    let(:station) { double :station }
+   let(:station2) { double :station2 }
 
   describe "balance" do
     it "should start with a balance of 0" do
@@ -66,6 +67,12 @@ require "oyster_card.rb"
         oyster = OysterCard.new(10)
         oyster.touch_in(:station)
         expect(oyster.entry_station). to eq(:station)
+      end
+      it 'should show all previous journeys' do
+        oyster = OysterCard.new(10)
+        oyster.touch_in(:station)
+        oyster.touch_out(:station2)
+        expect(oyster.trips).to eq([[:station, :station2]])
       end
     end
   end
