@@ -3,11 +3,11 @@ class OysterCard
   DEFAULT_BALANCE = 0
   MINIMUM_FARE = 1
   MAXIMUM_BALANCE = 90
-  attr_reader :balance, :entry_station
+
+  attr_reader :balance, :entry_station, :exit_station
 
   def initialize(balance = DEFAULT_BALANCE)
   @balance = balance
-  @tracks = []
   @trips = []
 
   end
@@ -18,17 +18,16 @@ class OysterCard
   end
 
   def touch_in(station)
-    fail "not enough funds" if @balance < MINIMUM_FARE
+    fail "not enough funds" if low_balance?
     @entry_station = station
-    @tracks << @entry_station
+    @trips << { entry: entry_station }
     # @trips << @tracks
   end
 
   def touch_out(station)
     subtract_fare(MINIMUM_FARE)
     @exit_station = station
-    @tracks << @exit_station
-    @trips << @tracks
+    @trips.last[:exit] = exit_station
     @entry_station = nil
   end
 
@@ -39,6 +38,10 @@ class OysterCard
 
   def trip_tracker
     @trips
+  end
+
+  def low_balance?
+    @balance < MINIMUM_FARE
   end
 
   private
