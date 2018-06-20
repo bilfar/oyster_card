@@ -1,4 +1,5 @@
 require "oyster_card.rb"
+require "station.rb"
 
  describe OysterCard do
    let(:station) { double :station }
@@ -71,5 +72,6 @@ require "oyster_card.rb"
         oyster.touch_out(:station2)
         expect(oyster.trip_tracker).to eq([{entry: :station, exit: :station2}])
       end
+
     end
   end
